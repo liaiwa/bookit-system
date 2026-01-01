@@ -27,9 +27,8 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         --primary: #2A64F6;
         --secondary: #00C4B3;
         --accent: #FF6B6B;
-        --success: #28a745;
         --light: #f8f9fa;
-        --dark: #1a1a2e;
+        --dark: #212529;
         --gray: #6c757d;
     }
     
@@ -41,116 +40,169 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
     
     body {
         font-family: 'Poppins', sans-serif;
-        line-height: 1.6;
+        line-height: 1.7;
         color: var(--dark);
         background-color: white;
+        margin: 0;
         width: 100%;
         overflow-x: hidden;
     }
-    
-    /* Full width container */
-    .full-width-container {
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
-        padding: 0;
+
+     /* Container */
+    .container {
+        max-width: 1280px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 20px;
+        padding-right: 20px;
     }
-    
-    /* Header & Navigation - SimplyBook Style */
+
+    @media (min-width: 992px) {
+        .container {
+            padding-left: 40px;
+            padding-right: 40px;
+        }
+    }
+
+    @media (min-width: 1400px) {
+        .container {
+            max-width: 1360px;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+    }
+
+    /* Navbar - Minimal but with animation */
     .navbar {
         background: white;
-        box-shadow: 0 2px 20px rgba(0,0,0,0.08);
-        padding: 1rem 0;
+        padding: 1.5rem 0;
         transition: all 0.3s ease;
         width: 100%;
+        border-bottom: 1px solid #f0f0f0;
     }
-    
-    .navbar .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
+
+    .navbar.scrolled {
+        padding: 1rem 0;
+        box-shadow: 0 2px 10px rgba(0,0,0,0.05);
     }
-    
+
     .navbar-brand {
         font-weight: 700;
         font-size: 1.8rem;
         color: var(--primary) !important;
+        transition: all 0.3s ease;
     }
-    
+
+    .navbar-brand:hover {
+        transform: translateY(-2px);
+    }
+
     .navbar-brand i {
-        color: var(--secondary);
+        color: var(--primary);
         margin-right: 8px;
+        transition: transform 0.3s ease;
     }
-    
+
+    .navbar-brand:hover i {
+        transform: rotate(-10deg);
+    }
+
     .nav-link {
         font-weight: 500;
         margin: 0 15px;
         color: var(--dark) !important;
-        transition: color 0.3s ease;
+        transition: all 0.3s ease;
+        position: relative;
     }
-    
+
     .nav-link:hover {
         color: var(--primary) !important;
     }
-    
+
+    .nav-link::after {
+        content: '';
+        position: absolute;
+        bottom: -5px;
+        left: 0;
+        width: 0;
+        height: 2px;
+        background: var(--primary);
+        transition: width 0.3s ease;
+    }
+
+    .nav-link:hover::after {
+        width: 100%;
+    }
+
     .btn-nav {
         background: var(--primary);
         border: none;
         color: white;
-        padding: 10px 25px;
-        border-radius: 30px;
+        padding: 10px 28px;
+        border-radius: 4px;
         font-weight: 600;
         transition: all 0.3s ease;
         text-decoration: none;
     }
-    
+
     .btn-nav:hover {
         background: #1a53f5;
-        color: white;
-        transform: translateY(-2px);
-        box-shadow: 0 5px 15px rgba(42, 100, 246, 0.3);
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(42, 100, 246, 0.2);
     }
-    
-    /* Hero Section - Full width */
+
+    /* Hero - Minimal with animations */
     .hero {
-        background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
-        color: var(--dark);
-        padding: 180px 0 120px;
-        position: relative;
-        overflow: hidden;
+        background: white;
         width: 100%;
+        padding: 200px 0 140px;
     }
-    
-    .hero .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
+
     .hero h1 {
         font-size: 3.5rem;
         font-weight: 700;
-        margin-bottom: 1.5rem;
         line-height: 1.2;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease forwards;
     }
-    
+
     .hero p.lead {
-        font-size: 1.25rem;
+        font-size: 1.3rem;
         color: var(--gray);
-        margin-bottom: 2.5rem;
         max-width: 600px;
+        margin-bottom: 2.5rem;
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease 0.2s forwards;
     }
-    
+
+    .hero-buttons {
+        opacity: 0;
+        transform: translateY(30px);
+        animation: fadeInUp 0.8s ease 0.4s forwards;
+    }
+
+    .hero img {
+        opacity: 0;
+        transform: translateX(30px);
+        animation: fadeInRight 0.8s ease 0.6s forwards;
+        border-radius: 10px;
+        transition: transform 0.5s ease;
+    }
+
+    .hero img:hover {
+        transform: scale(1.02);
+    }
+
     .btn-primary-custom {
-        background: linear-gradient(135deg, var(--primary), #1a53f5);
+        background: var(--primary);
         border: none;
         color: white;
-        padding: 16px 45px;
-        border-radius: 30px;
+        padding: 14px 35px;
+        border-radius: 4px;
         font-weight: 600;
         font-size: 1.1rem;
         transition: all 0.3s ease;
@@ -158,356 +210,287 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         display: inline-block;
         margin-right: 15px;
         margin-bottom: 10px;
-        box-shadow: 0 5px 15px rgba(42, 100, 246, 0.3);
     }
-    
+
     .btn-primary-custom:hover {
+        background: #1a53f5;
         transform: translateY(-3px);
-        box-shadow: 0 10px 25px rgba(42, 100, 246, 0.4);
-        color: white;
+        box-shadow: 0 8px 20px rgba(42, 100, 246, 0.2);
     }
-    
+
     .btn-outline-custom {
         background: transparent;
-        border: 2px solid var(--primary);
+        border: 1px solid var(--primary);
         color: var(--primary);
-        padding: 16px 45px;
-        border-radius: 30px;
+        padding: 14px 35px;
+        border-radius: 4px;
         font-weight: 600;
         font-size: 1.1rem;
         transition: all 0.3s ease;
         text-decoration: none;
         display: inline-block;
     }
-    
+
     .btn-outline-custom:hover {
         background: var(--primary);
         color: white;
         transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(42, 100, 246, 0.1);
     }
-    
-    /* Features Section */
-    .features {
+
+    /* Sections */
+    .features,
+    .roles,
+    .how-it-works,
+    .stats,
+    .cta-section {
         padding: 120px 0;
-        background: white;
         width: 100%;
     }
-    
-    .features .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
+
     .section-title {
         text-align: center;
         margin-bottom: 4rem;
     }
-    
+
     .section-title h2 {
-        font-size: 2.8rem;
-        font-weight: 700;
-        color: var(--dark);
+        font-size: 2.5rem;
+        font-weight: 600;
         margin-bottom: 1rem;
+        color: var(--dark);
+        opacity: 0;
+        transform: translateY(20px);
     }
-    
+
     .section-title p {
+        font-size: 1.1rem;
         color: var(--gray);
-        font-size: 1.2rem;
-        max-width: 700px;
+        max-width: 600px;
         margin: 0 auto;
+        opacity: 0;
+        transform: translateY(20px);
     }
-    
-    .feature-card {
+
+    .section-title.animate h2,
+    .section-title.animate p {
+        opacity: 1;
+        transform: translateY(0);
+        transition: all 0.6s ease;
+    }
+
+    /* Features - Minimal with animations */
+    .features {
         background: white;
-        border-radius: 15px;
-        padding: 45px 35px;
-        height: 100%;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        transition: all 0.3s ease;
-        border: 1px solid #f0f0f0;
+    }
+
+    .feature-item {
         text-align: center;
+        margin-bottom: 3rem;
+        padding: 40px 30px;
+        transition: all 0.3s ease;
         opacity: 0;
         transform: translateY(30px);
     }
-    
-    .feature-card.animate {
+
+    .feature-item.animate {
         opacity: 1;
         transform: translateY(0);
     }
-    
-    .feature-card:hover {
+
+    .feature-item:hover {
         transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
-        border-color: var(--primary);
     }
-    
+
     .feature-icon {
-        width: 90px;
-        height: 90px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
-        border-radius: 20px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        margin: 0 auto 30px;
-        transform: rotate(45deg);
+        font-size: 2.8rem;
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        display: inline-block;
         transition: all 0.3s ease;
     }
-    
-    .feature-card:hover .feature-icon {
-        transform: rotate(0deg) scale(1.1);
+
+    .feature-item:hover .feature-icon {
+        transform: scale(1.1) rotate(5deg);
     }
-    
-    .feature-icon i {
-        font-size: 2.2rem;
-        color: white;
-        transform: rotate(-45deg);
-        transition: all 0.3s ease;
-    }
-    
-    .feature-card:hover .feature-icon i {
-        transform: rotate(0deg);
-    }
-    
-    .feature-card h3 {
-        font-size: 1.6rem;
+
+    .feature-item h3 {
+        font-size: 1.4rem;
         font-weight: 600;
-        margin-bottom: 15px;
+        margin-bottom: 1rem;
         color: var(--dark);
     }
-    
-    /* Role Cards Section */
+
+    .feature-item p {
+        color: var(--gray);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Role Cards - Minimal with animations */
     .roles {
-        padding: 120px 0;
-        background: #f8faff;
-        width: 100%;
+        background: #f8f9fa;
     }
-    
-    .roles .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
-    .role-card {
+
+    .role-item {
         background: white;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        padding: 40px 30px;
         height: 100%;
+        text-align: center;
+        border: 1px solid #f0f0f0;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         opacity: 0;
         transform: translateY(40px) scale(0.95);
     }
-    
-    .role-card.animate {
+
+    .role-item.animate {
         opacity: 1;
         transform: translateY(0) scale(1);
     }
-    
-    .role-card:hover {
-        transform: translateY(-15px) scale(1.02);
-        box-shadow: 0 25px 50px rgba(0,0,0,0.15);
+
+    .role-item:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.08);
+        border-color: var(--primary);
     }
-    
-    .role-header {
-        padding: 45px 35px;
-        color: white;
-        text-align: center;
-        position: relative;
-        overflow: hidden;
-    }
-    
-    .role-header::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: linear-gradient(45deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
-        opacity: 0;
-        transition: opacity 0.3s ease;
-    }
-    
-    .role-card:hover .role-header::before {
-        opacity: 1;
-    }
-    
-    .role-student .role-header {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    }
-    
-    .role-lecturer .role-header {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-    }
-    
-    .role-everyone .role-header {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-    }
-    
+
     .role-icon {
-        font-size: 4rem;
-        margin-bottom: 25px;
+        font-size: 3rem;
+        color: white;
+        margin-bottom: 1.5rem;
         display: inline-block;
-        transition: all 0.5s ease;
-        transform: translateY(0);
-    }
-    
-    .role-card:hover .role-icon {
-        transform: translateY(-10px) scale(1.1);
-    }
-    
-    .role-header h3 {
-        font-size: 2rem;
-        font-weight: 700;
-        margin: 0;
+        width: 90px;
+        height: 90px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
         transition: all 0.3s ease;
     }
-    
-    .role-card:hover .role-header h3 {
-        transform: scale(1.05);
+
+    .role-item:hover .role-icon {
+        transform: scale(1.1);
     }
-    
-    .role-body {
-        padding: 45px 35px;
-        position: relative;
+
+    .role-student .role-icon {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     }
-    
-    .role-body h4 {
+
+    .role-lecturer .role-icon {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    }
+
+    .role-everyone .role-icon {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+    }
+
+    .role-item h3 {
         font-size: 1.5rem;
         font-weight: 600;
-        margin-bottom: 25px;
+        margin-bottom: 1.5rem;
         color: var(--dark);
-        position: relative;
-        display: inline-block;
     }
-    
-    .role-body h4::after {
-        content: '';
-        position: absolute;
-        bottom: -5px;
-        left: 0;
-        width: 50px;
-        height: 3px;
-        background: var(--primary);
-        transition: width 0.3s ease;
-    }
-    
-    .role-card:hover .role-body h4::after {
-        width: 100%;
-    }
-    
-    .role-body ul {
+
+    .role-item ul {
         list-style: none;
         padding: 0;
         margin: 0;
+        text-align: left;
     }
-    
-    .role-body li {
-        padding: 14px 0;
+
+    .role-item li {
+        padding: 10px 0;
         color: var(--gray);
         position: relative;
-        padding-left: 35px;
+        padding-left: 30px;
         transition: all 0.3s ease;
         border-bottom: 1px solid #f0f0f0;
-        font-size: 1.1rem;
     }
-    
-    .role-body li:last-child {
+
+    .role-item li:last-child {
         border-bottom: none;
     }
-    
-    .role-body li:hover {
+
+    .role-item li:hover {
         color: var(--primary);
-        padding-left: 40px;
+        padding-left: 35px;
     }
-    
-    .role-body li:before {
+
+    .role-item li:before {
         content: '✓';
         position: absolute;
         left: 0;
         color: var(--primary);
         font-weight: bold;
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         transition: all 0.3s ease;
     }
-    
-    .role-body li:hover:before {
+
+    .role-item li:hover:before {
         transform: scale(1.2);
     }
-    
-    /* How It Works Section */
+
+    /* How It Works - Minimal with animations */
     .how-it-works {
-        padding: 120px 0;
         background: white;
-        width: 100%;
     }
-    
-    .how-it-works .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
-    .step-card {
-        background: white;
-        border-radius: 15px;
-        padding: 45px 35px;
+
+    .step-item {
         text-align: center;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-        height: 100%;
+        padding: 40px 30px;
+        transition: all 0.3s ease;
         opacity: 0;
         transform: translateY(30px);
-        transition: all 0.3s ease;
     }
-    
-    .step-card.animate {
+
+    .step-item.animate {
         opacity: 1;
         transform: translateY(0);
     }
-    
-    .step-card:hover {
+
+    .step-item:hover {
         transform: translateY(-10px);
-        box-shadow: 0 20px 40px rgba(0,0,0,0.12);
     }
-    
+
     .step-number {
-        width: 80px;
-        height: 80px;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        width: 70px;
+        height: 70px;
+        background: var(--primary);
         border-radius: 50%;
         display: flex;
         align-items: center;
         justify-content: center;
-        margin: 0 auto 30px;
+        margin: 0 auto 1.5rem;
         color: white;
-        font-size: 2rem;
-        font-weight: 700;
+        font-size: 1.8rem;
+        font-weight: 600;
         transition: all 0.5s ease;
     }
-    
-    .step-card:hover .step-number {
+
+    .step-item:hover .step-number {
         transform: rotate(360deg) scale(1.1);
     }
-    
-    /* Stats Section - Full width background */
+
+    .step-item h3 {
+        font-size: 1.4rem;
+        font-weight: 600;
+        margin-bottom: 1rem;
+        color: var(--dark);
+    }
+
+    .step-item p {
+        color: var(--gray);
+        font-size: 1rem;
+        line-height: 1.6;
+    }
+
+    /* Stats - Minimal with animations */
     .stats {
-        padding: 100px 0;
-        background: linear-gradient(135deg, var(--primary), var(--secondary));
+        background: var(--primary);
         color: white;
         position: relative;
         overflow: hidden;
-        width: 100%;
     }
-    
-    .stats .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
+
     .stats::before {
         content: '';
         position: absolute;
@@ -518,175 +501,180 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,160C384,160,480,128,576,112C672,96,768,96,864,112C960,128,1056,160,1152,160C1248,160,1344,128,1392,112L1440,96L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>') no-repeat;
         background-size: cover;
     }
-    
+
     .stat-item {
         text-align: center;
         opacity: 0;
         transform: translateY(20px);
     }
-    
+
     .stat-item.animate {
         opacity: 1;
         transform: translateY(0);
     }
-    
+
     .stat-number {
-        font-size: 3.8rem;
-        font-weight: 800;
-        margin-bottom: 15px;
+        font-size: 3.5rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
         color: white;
         text-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        position: relative;
-        display: inline-block;
         transition: all 0.3s ease;
     }
-    
+
     .stat-item:hover .stat-number {
         transform: scale(1.1);
     }
-    
+
     .stat-label {
-        font-size: 1.2rem;
+        font-size: 1.1rem;
         opacity: 0.9;
         text-transform: uppercase;
         letter-spacing: 1px;
         transition: all 0.3s ease;
     }
-    
+
     .stat-item:hover .stat-label {
         opacity: 1;
         letter-spacing: 2px;
     }
-    
-    /* CTA Section */
+
+    /* CTA - Minimal with animations */
     .cta-section {
-        padding: 120px 0;
-        background: linear-gradient(135deg, #f8faff 0%, #ffffff 100%);
-        width: 100%;
-    }
-    
-    .cta-section .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
-    .cta-card {
         background: white;
-        border-radius: 20px;
-        padding: 70px 60px;
-        box-shadow: 0 25px 50px rgba(0,0,0,0.1);
+    }
+
+    .cta-content {
         text-align: center;
-        position: relative;
-        overflow: hidden;
+        max-width: 800px;
+        margin: 0 auto;
         opacity: 0;
         transform: scale(0.9);
-        transition: all 0.6s ease;
     }
-    
-    .cta-card.animate {
+
+    .cta-content.animate {
         opacity: 1;
         transform: scale(1);
+        transition: all 0.6s ease;
     }
-    
-    .cta-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: -100%;
-        width: 100%;
-        height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-        transition: left 0.7s ease;
+
+    .cta-content h2 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        margin-bottom: 1.5rem;
+        color: var(--dark);
     }
-    
-    .cta-card:hover::before {
-        left: 100%;
+
+    .cta-content p {
+        font-size: 1.2rem;
+        color: var(--gray);
+        margin-bottom: 2.5rem;
     }
-    
-    /* Footer - Full width */
+
+    /* Footer - Minimal with animations */
     .footer {
         background: var(--dark);
         color: white;
         padding: 80px 0 40px;
         width: 100%;
     }
-    
-    .footer .container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-    }
-    
+
     .footer h5 {
-        font-size: 1.3rem;
+        font-size: 1.2rem;
         font-weight: 600;
-        margin-bottom: 30px;
+        margin-bottom: 1.5rem;
         color: white;
     }
-    
+
     .footer-links {
         list-style: none;
         padding: 0;
         margin: 0;
     }
-    
+
     .footer-links li {
-        margin-bottom: 15px;
+        margin-bottom: 10px;
         opacity: 0;
         transform: translateX(-20px);
         transition: all 0.3s ease;
     }
-    
+
     .footer-links li.animate {
         opacity: 1;
         transform: translateX(0);
     }
-    
+
     .footer-links a {
         color: #adb5bd;
         text-decoration: none;
         transition: all 0.3s ease;
         display: inline-block;
-        font-size: 1.05rem;
     }
-    
+
     .footer-links a:hover {
         color: white;
         transform: translateX(5px);
     }
-    
+
     .copyright {
         text-align: center;
         padding-top: 40px;
-        margin-top: 60px;
+        margin-top: 40px;
         border-top: 1px solid #495057;
         color: #adb5bd;
-        font-size: 1rem;
+        font-size: 0.9rem;
         opacity: 0;
         transform: translateY(20px);
         transition: all 0.5s ease;
     }
-    
+
     .copyright.animate {
         opacity: 1;
         transform: translateY(0);
     }
-    
+
+    /* Animation Keyframes */
+    @keyframes fadeInUp {
+        from {
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    @keyframes fadeInRight {
+        from {
+            opacity: 0;
+            transform: translateX(30px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
     /* Responsive */
     @media (max-width: 1200px) {
         .hero h1 {
-            font-size: 3.2rem;
+            font-size: 3rem;
         }
         
         .section-title h2 {
-            font-size: 2.5rem;
+            font-size: 2.2rem;
         }
     }
-    
+
     @media (max-width: 992px) {
+        .hero {
+            padding: 160px 0 100px;
+            text-align: center;
+        }
+        
         .hero h1 {
-            font-size: 2.8rem;
+            font-size: 2.5rem;
         }
         
         .hero p.lead {
@@ -694,23 +682,21 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         }
         
         .section-title h2 {
-            font-size: 2.3rem;
+            font-size: 2rem;
         }
         
-        .btn-outline-custom {
-            margin-left: 0;
-            margin-top: 15px;
+        .features,
+        .roles,
+        .how-it-works,
+        .stats,
+        .cta-section {
+            padding: 100px 0;
         }
     }
-    
+
     @media (max-width: 768px) {
-        .hero {
-            padding: 150px 0 80px;
-            text-align: center;
-        }
-        
         .hero h1 {
-            font-size: 2.3rem;
+            font-size: 2rem;
         }
         
         .hero p.lead {
@@ -718,11 +704,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         }
         
         .section-title h2 {
-            font-size: 2rem;
-        }
-        
-        .section-title p {
-            font-size: 1.1rem;
+            font-size: 1.8rem;
         }
         
         .btn-primary-custom, .btn-outline-custom {
@@ -732,43 +714,34 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
             margin-bottom: 15px;
         }
         
-        .cta-card {
-            padding: 50px 30px;
-        }
-        
-        .role-card {
-            margin-bottom: 30px;
-        }
-        
-        .feature-card, .role-body, .step-card {
-            padding: 35px 25px;
-        }
-        
-        .role-header {
-            padding: 35px 25px;
+        .feature-item,
+        .role-item,
+        .step-item {
+            margin-bottom: 2rem;
         }
     }
-    
+
     @media (max-width: 576px) {
-        .hero h1 {
-            font-size: 2rem;
+        .hero {
+            padding: 140px 0 60px;
         }
         
-        .section-title h2 {
-            font-size: 1.8rem;
+        .container {
+            padding-left: 15px;
+            padding-right: 15px;
         }
         
-        .stat-number {
-            font-size: 2.8rem;
-        }
-        
-        .stat-label {
-            font-size: 1rem;
+        .features,
+        .roles,
+        .how-it-works,
+        .stats,
+        .cta-section {
+            padding: 80px 0;
         }
     }
     </style>
 </head>
-<body class="full-width-container">
+<body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
         <div class="container">
@@ -823,8 +796,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 </div>
                 <div class="col-lg-6">
                     <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                         alt="Calendar Dashboard" class="img-fluid" 
-                         style="border-radius: 20px; box-shadow: 0 25px 50px rgba(0,0,0,0.1);">
+                         alt="Calendar Dashboard" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -838,9 +810,9 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 <p>Everything you need for efficient lecturer appointment management</p>
             </div>
             
-            <div class="row g-4">
+            <div class="row">
                 <div class="col-md-4">
-                    <div class="feature-card">
+                    <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-calendar-check"></i>
                         </div>
@@ -850,7 +822,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="feature-card">
+                    <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-clock"></i>
                         </div>
@@ -860,7 +832,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="feature-card">
+                    <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-bell"></i>
                         </div>
@@ -868,9 +840,11 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                         <p>Automated reminders for both students and lecturers. Never miss an appointment again.</p>
                     </div>
                 </div>
-                
+            </div>
+            
+            <div class="row mt-4">
                 <div class="col-md-4">
-                    <div class="feature-card">
+                    <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-chart-bar"></i>
                         </div>
@@ -880,7 +854,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="feature-card">
+                    <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-mobile-alt"></i>
                         </div>
@@ -890,7 +864,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="feature-card">
+                    <div class="feature-item">
                         <div class="feature-icon">
                             <i class="fas fa-shield-alt"></i>
                         </div>
@@ -912,65 +886,50 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
             
             <div class="row g-4">
                 <div class="col-md-4">
-                    <div class="role-card role-student">
-                        <div class="role-header">
-                            <div class="role-icon">
-                                <i class="fas fa-user-graduate"></i>
-                            </div>
-                            <h3>Students</h3>
+                    <div class="role-item role-student">
+                        <div class="role-icon">
+                            <i class="fas fa-user-graduate"></i>
                         </div>
-                        <div class="role-body">
-                            <h4>Book Appointments Easily</h4>
-                            <ul>
-                                <li>View lecturer availability</li>
-                                <li>Book appointments online</li>
-                                <li>Receive notifications</li>
-                                <li>Track appointment history</li>
-                                <li>Cancel or reschedule</li>
-                            </ul>
-                        </div>
+                        <h3>Students</h3>
+                        <ul>
+                            <li>View lecturer availability</li>
+                            <li>Book appointments online</li>
+                            <li>Receive notifications</li>
+                            <li>Track appointment history</li>
+                            <li>Cancel or reschedule</li>
+                        </ul>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="role-card role-lecturer">
-                        <div class="role-header">
-                            <div class="role-icon">
-                                <i class="fas fa-chalkboard-teacher"></i>
-                            </div>
-                            <h3>Lecturers</h3>
+                    <div class="role-item role-lecturer">
+                        <div class="role-icon">
+                            <i class="fas fa-chalkboard-teacher"></i>
                         </div>
-                        <div class="role-body">
-                            <h4>Manage Your Schedule</h4>
-                            <ul>
-                                <li>Set available time slots</li>
-                                <li>Approve/reject requests</li>
-                                <li>View appointment calendar</li>
-                                <li>Block unavailable times</li>
-                                <li>Track meeting history</li>
-                            </ul>
-                        </div>
+                        <h3>Lecturers</h3>
+                        <ul>
+                            <li>Set available time slots</li>
+                            <li>Approve/reject requests</li>
+                            <li>View appointment calendar</li>
+                            <li>Block unavailable times</li>
+                            <li>Track meeting history</li>
+                        </ul>
                     </div>
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="role-card role-everyone">
-                        <div class="role-header">
-                            <div class="role-icon">
-                                <i class="fas fa-users"></i>
-                            </div>
-                            <h3>Everyone</h3>
+                    <div class="role-item role-everyone">
+                        <div class="role-icon">
+                            <i class="fas fa-users"></i>
                         </div>
-                        <div class="role-body">
-                            <h4>Unified Platform</h4>
-                            <ul>
-                                <li>Easy registration process</li>
-                                <li>User-friendly dashboard</li>
-                                <li>Real-time updates</li>
-                                <li>Cross-platform access</li>
-                                <li>24/7 system availability</li>
-                            </ul>
-                        </div>
+                        <h3>Everyone</h3>
+                        <ul>
+                            <li>Easy registration process</li>
+                            <li>User-friendly dashboard</li>
+                            <li>Real-time updates</li>
+                            <li>Cross-platform access</li>
+                            <li>24/7 system availability</li>
+                        </ul>
                     </div>
                 </div>
             </div>
@@ -985,9 +944,9 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 <p>Simple three-step process for booking appointments</p>
             </div>
             
-            <div class="row g-4">
+            <div class="row">
                 <div class="col-md-4">
-                    <div class="step-card">
+                    <div class="step-item">
                         <div class="step-number">1</div>
                         <h3>Browse Lecturers</h3>
                         <p>Students browse available lecturers and view their schedules, specialties, and office hours.</p>
@@ -995,7 +954,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="step-card">
+                    <div class="step-item">
                         <div class="step-number">2</div>
                         <h3>Book Appointment</h3>
                         <p>Select a convenient time slot, specify the purpose, and book the appointment with one click.</p>
@@ -1003,7 +962,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                 </div>
                 
                 <div class="col-md-4">
-                    <div class="step-card">
+                    <div class="step-item">
                         <div class="step-number">3</div>
                         <h3>Meet & Connect</h3>
                         <p>Attend the scheduled meeting and get the academic guidance you need from your lecturer.</p>
@@ -1040,25 +999,21 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-lg-8">
-                    <div class="cta-card">
-                        <h2 class="mb-4">Ready to Simplify Your Appointment Booking?</h2>
-                        <p class="mb-4">Join hundreds of students and lecturers who have transformed their academic scheduling experience.</p>
-                        <div class="row justify-content-center">
-                            <div class="col-md-8">
-                                <div class="row g-3">
-                                    <div class="col-md-6">
-                                        <a href="/users/register" class="btn-primary-custom w-100">
-                                            <i class="fas fa-user-graduate me-2"></i>Student Sign Up
-                                        </a>
-                                    </div>
-                                    <div class="col-md-6">
-                                        <a href="/users/register" class="btn-outline-custom w-100">
-                                            <i class="fas fa-chalkboard-teacher me-2"></i>Lecturer Sign Up
-                                        </a>
-                                    </div>
-                                </div>
+            <div class="cta-content">
+                <h2>Ready to Simplify Your Appointment Booking?</h2>
+                <p>Join hundreds of students and lecturers who have transformed their academic scheduling experience.</p>
+                <div class="row justify-content-center">
+                    <div class="col-md-8">
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <a href="/users/register" class="btn-primary-custom w-100">
+                                    <i class="fas fa-user-graduate me-2"></i>Student Sign Up
+                                </a>
+                            </div>
+                            <div class="col-md-6">
+                                <a href="/users/register" class="btn-outline-custom w-100">
+                                    <i class="fas fa-chalkboard-teacher me-2"></i>Lecturer Sign Up
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -1121,6 +1076,9 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
+            document.addEventListener('DOMContentLoaded', function() {
+        document.body.style.zoom = "80%";
+    });
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1135,22 +1093,20 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
             });
         });
         
-        // Navbar background on scroll
+        // Navbar scroll effect
         window.addEventListener('scroll', function() {
             const navbar = document.querySelector('.navbar');
             if (window.scrollY > 50) {
-                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.08)';
-                navbar.style.padding = '0.5rem 0';
+                navbar.classList.add('scrolled');
             } else {
-                navbar.style.boxShadow = '0 2px 20px rgba(0,0,0,0.05)';
-                navbar.style.padding = '1rem 0';
+                navbar.classList.remove('scrolled');
             }
         });
         
         // Animation on scroll
         const observerOptions = {
             threshold: 0.1,
-            rootMargin: '0px 0px -100px 0px'
+            rootMargin: '0px 0px -50px 0px'
         };
         
         const observer = new IntersectionObserver((entries) => {
@@ -1172,24 +1128,13 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         }, observerOptions);
         
         // Observe all animated elements
-        document.querySelectorAll('.feature-card, .role-card, .step-card, .stat-item, .cta-card, .copyright').forEach(el => {
+        document.querySelectorAll('.section-title, .feature-item, .role-item, .step-item, .stat-item, .cta-content, .copyright').forEach(el => {
             observer.observe(el);
         });
         
         // Observe footer sections
         document.querySelectorAll('.footer-links').forEach(el => {
             observer.observe(el);
-        });
-        
-        // Add hover effects for role cards
-        document.querySelectorAll('.role-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.zIndex = '10';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.zIndex = '1';
-            });
         });
         
         // Counter animation for stats
