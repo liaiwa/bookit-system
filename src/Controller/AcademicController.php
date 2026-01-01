@@ -8,6 +8,15 @@ use Cake\Http\Exception\NotFoundException;
 class AcademicController extends AppController
 {
     // =========================
+    // INDEX - REQUIRED METHOD
+    // =========================
+    public function index(): void
+    {
+        // Redirect to faculties page (or show dashboard)
+        $this->redirect(['action' => 'faculties']);
+    }
+
+    // =========================
     // FACULTIES
     // =========================
     public function faculties()
