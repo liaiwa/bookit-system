@@ -5,9 +5,19 @@ namespace App\Controller;
 
 use Cake\Http\Exception\NotFoundException;
 
+/**
+ * LecturersController class
+ *
+ * Handles lecturer-related actions
+ */
 class LecturersController extends AppController
 {
-    public function index()
+    /**
+     * Index method
+     *
+     * @return void Renders view
+     */
+    public function index(): void
     {
         $Lecturers = $this->fetchTable('Lecturers');
 
@@ -19,7 +29,14 @@ class LecturersController extends AppController
         $this->set(compact('lecturers'));
     }
 
-    public function view($id = null)
+    /**
+     * View method
+     *
+     * @param int|null $id Lecturer id
+     * @return void Renders view
+     * @throws \Cake\Http\Exception\NotFoundException When lecturer not found
+     */
+    public function view(?int $id = null): void
     {
         if (!$id) {
             throw new NotFoundException('Lecturer not found');
@@ -28,7 +45,7 @@ class LecturersController extends AppController
         $Lecturers = $this->fetchTable('Lecturers');
 
         $lecturer = $Lecturers->find()
-            ->where(['Lecturers.id' => (int)$id])
+            ->where(['Lecturers.id' => $id])
             ->contain([
                 'Faculties',
                 'AvailabilitySlots' => function ($q) {
