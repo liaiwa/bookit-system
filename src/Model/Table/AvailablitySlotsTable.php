@@ -6,11 +6,11 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 
 /**
- * ProgrammesTable class
+ * AvailabilitySlotsTable class
  *
- * Handles programmes data
+ * Handles availability slots data
  */
-class ProgrammesTable extends Table
+class AvailabilitySlotsTable extends Table
 {
     /**
      * Initialize method
@@ -22,17 +22,13 @@ class ProgrammesTable extends Table
     {
         parent::initialize($config);
 
-        $this->setTable('programmes');
+        $this->setTable('availability_slots');
+        $this->setDisplayField('id');
         $this->setPrimaryKey('id');
-        $this->setDisplayField('programme_name');
 
-        $this->belongsTo('Faculties', [
-            'foreignKey' => 'faculty_id',
-            'joinType' => 'LEFT',
-        ]);
-
-        $this->hasMany('Students', [
-            'foreignKey' => 'programme_id',
+        $this->belongsTo('Lecturers', [
+            'foreignKey' => 'lecturer_id',
+            'joinType' => 'INNER',
         ]);
     }
 }
