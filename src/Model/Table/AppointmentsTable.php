@@ -6,8 +6,19 @@ namespace App\Model\Table;
 use Cake\ORM\Table;
 use Cake\Validation\Validator;
 
+/**
+ * AppointmentsTable class
+ *
+ * Handles appointments data and validation
+ */
 class AppointmentsTable extends Table
 {
+    /**
+     * Initialize method
+     *
+     * @param array<string, mixed> $config The configuration for the Table
+     * @return void
+     */
     public function initialize(array $config): void
     {
         parent::initialize($config);
@@ -27,6 +38,12 @@ class AppointmentsTable extends Table
         ]);
     }
 
+    /**
+     * Default validation rules
+     *
+     * @param \Cake\Validation\Validator $validator Validator instance
+     * @return \Cake\Validation\Validator
+     */
     public function validationDefault(Validator $validator): Validator
     {
         $validator

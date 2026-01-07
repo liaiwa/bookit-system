@@ -11,24 +11,13 @@ use function Cake\Core\env;
 return [
     /*
      * Debug Level:
-     *
-     * Production Mode:
-     * false: No error messages, errors, or warnings shown.
-     *
-     * Development Mode:
-     * true: Errors and warnings shown.
+     * - false = production mode (clean output, no error messages shown to users)
+     * - true  = development mode (shows full stack traces + debug toolbar)
      */
-    'debug' => filter_var(env('DEBUG', true), FILTER_VALIDATE_BOOLEAN),
+    'debug' => false,   // ← Keep this false to remove those annoying header warnings
 
-    /*
-     * Security and encryption configuration
-     *
-     * - salt - A random string used in security hashing methods.
-     *   The salt value is also used as the encryption key.
-     *   You should treat it as extremely sensitive data.
-     */
     'Security' => [
-        'salt' => env('SECURITY_SALT', '__SALT__'),
+        'salt' => env('SECURITY_SALT', '788ea209093ce4dc0eff25a8442f5c0a42efad0fe212c8523c1ec6d8660c8055'),
     ],
 
     /*

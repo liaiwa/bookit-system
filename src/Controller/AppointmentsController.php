@@ -3,9 +3,21 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use Cake\Http\Response;
+
+/**
+ * AppointmentsController class
+ *
+ * Handles appointment-related actions
+ */
 class AppointmentsController extends AppController
 {
-    public function index()
+    /**
+     * Index method
+     *
+     * @return void Renders view
+     */
+    public function index(): void
     {
         $this->paginate = [
             'contain' => ['Students', 'Lecturers'],
@@ -19,7 +31,12 @@ class AppointmentsController extends AppController
         $this->set(compact('appointments'));
     }
 
-    public function add()
+    /**
+     * Add method
+     *
+     * @return \Cake\Http\Response|null Redirects on successful add, renders view otherwise
+     */
+    public function add(): ?Response
     {
         $Appointments = $this->fetchTable('Appointments');
         $appointment = $Appointments->newEmptyEntity();
@@ -29,16 +46,16 @@ class AppointmentsController extends AppController
         $Lecturers = $this->fetchTable('Lecturers');
 
         $students = $Students->find('list', [
-                'keyField' => 'id',
-                'valueField' => 'student_id',
-            ])
+            'keyField' => 'id',
+            'valueField' => 'student_id',
+        ])
             ->orderAsc('student_id')
             ->toArray();
 
         $lecturers = $Lecturers->find('list', [
-                'keyField' => 'id',
-                'valueField' => 'lecturer_id',
-            ])
+            'keyField' => 'id',
+            'valueField' => 'lecturer_id',
+        ])
             ->orderAsc('lecturer_id')
             ->toArray();
 
@@ -59,12 +76,15 @@ class AppointmentsController extends AppController
 
             if ($Appointments->save($appointment)) {
                 $this->Flash->success('Appointment booking saved!');
-                return $this->redirect(['action' => 'index']); // return wajib
+
+                return $this->redirect(['action' => 'index']);
             }
 
             $this->Flash->error('Failed to save appointment. Please check the form.');
         }
 
         $this->set(compact('appointment', 'students', 'lecturers'));
+
+        return null;
     }
 }

@@ -4,13 +4,40 @@ declare(strict_types=1);
 namespace App\Controller;
 
 use Cake\Http\Exception\NotFoundException;
+use Cake\Http\Response;
 
+/**
+ * AcademicController class
+ *
+ * Handles academic-related actions including faculties, programmes, and students
+ */
 class AcademicController extends AppController
 {
     // =========================
+    // INDEX - REQUIRED METHOD
+    // =========================
+
+    /**
+     * Index method
+     *
+     * @return \Cake\Http\Response|null Redirects to faculties page
+     */
+    public function index(): ?Response
+    {
+        // Redirect to faculties page (or show dashboard)
+        return $this->redirect(['action' => 'faculties']);
+    }
+
+    // =========================
     // FACULTIES
     // =========================
-    public function faculties()
+
+    /**
+     * Faculties method
+     *
+     * @return void Renders view
+     */
+    public function faculties(): void
     {
         $Faculties = $this->fetchTable('Faculties');
 
@@ -21,7 +48,14 @@ class AcademicController extends AppController
         $this->set(compact('faculties'));
     }
 
-    public function facultyView($id = null)
+    /**
+     * Faculty view method
+     *
+     * @param int|null $id Faculty id
+     * @return void Renders view
+     * @throws \Cake\Http\Exception\NotFoundException When faculty not found
+     */
+    public function facultyView(?int $id = null): void
     {
         if (!$id) {
             throw new NotFoundException('Faculty not found');
@@ -30,11 +64,11 @@ class AcademicController extends AppController
         $Faculties = $this->fetchTable('Faculties');
 
         $faculty = $Faculties->find()
-            ->where(['Faculties.id' => (int)$id])
+            ->where(['Faculties.id' => $id])
             ->contain([
                 'Programmes' => function ($q) {
                     return $q->orderAsc('Programmes.programme_name');
-                }
+                },
             ])
             ->first();
 
@@ -48,7 +82,13 @@ class AcademicController extends AppController
     // =========================
     // PROGRAMMES
     // =========================
-    public function programmes()
+
+    /**
+     * Programmes method
+     *
+     * @return void Renders view
+     */
+    public function programmes(): void
     {
         $Programmes = $this->fetchTable('Programmes');
 
@@ -60,7 +100,14 @@ class AcademicController extends AppController
         $this->set(compact('programmes'));
     }
 
-    public function programmeView($id = null)
+    /**
+     * Programme view method
+     *
+     * @param int|null $id Programme id
+     * @return void Renders view
+     * @throws \Cake\Http\Exception\NotFoundException When programme not found
+     */
+    public function programmeView(?int $id = null): void
     {
         if (!$id) {
             throw new NotFoundException('Programme not found');
@@ -69,12 +116,12 @@ class AcademicController extends AppController
         $Programmes = $this->fetchTable('Programmes');
 
         $programme = $Programmes->find()
-            ->where(['Programmes.id' => (int)$id])
+            ->where(['Programmes.id' => $id])
             ->contain([
                 'Faculties',
                 'Students' => function ($q) {
                     return $q->orderAsc('Students.student_id');
-                }
+                },
             ])
             ->first();
 
@@ -86,9 +133,15 @@ class AcademicController extends AppController
     }
 
     // =========================
-    // STUDENTS  ✅ (NEXT ONE)
+    // STUDENTS
     // =========================
-    public function students()
+
+    /**
+     * Students method
+     *
+     * @return void Renders view
+     */
+    public function students(): void
     {
         $Students = $this->fetchTable('Students');
 
@@ -100,7 +153,14 @@ class AcademicController extends AppController
         $this->set(compact('students'));
     }
 
-    public function studentView($id = null)
+    /**
+     * Student view method
+     *
+     * @param int|null $id Student id
+     * @return void Renders view
+     * @throws \Cake\Http\Exception\NotFoundException When student not found
+     */
+    public function studentView(?int $id = null): void
     {
         if (!$id) {
             throw new NotFoundException('Student not found');
@@ -109,7 +169,7 @@ class AcademicController extends AppController
         $Students = $this->fetchTable('Students');
 
         $student = $Students->find()
-            ->where(['Students.id' => (int)$id])
+            ->where(['Students.id' => $id])
             ->contain(['Programmes' => ['Faculties'], 'Users'])
             ->first();
 
