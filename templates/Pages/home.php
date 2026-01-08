@@ -3,7 +3,7 @@
  * @var \App\View\AppView $this
  * @var string $message
  */
-$this->assign('title', 'BookIt - Lecturer Appointment Booking System');
+$this->assign('title', 'Lecturer Appointment Booking System');
 ?>
 
 <!DOCTYPE html>
@@ -23,6 +23,9 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
     
     <style>
+    html {
+    font-size: 80%;  
+    }
     :root {
         --primary: #2A64F6;
         --secondary: #00C4B3;
@@ -43,42 +46,76 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         line-height: 1.7;
         color: var(--dark);
         background-color: white;
-        margin: 0;
         width: 100%;
         overflow-x: hidden;
     }
 
-     /* Container */
-    .container {
-        max-width: 1280px;
-        margin-left: auto;
-        margin-right: auto;
-        padding-left: 20px;
-        padding-right: 20px;
+    /* COMPLETELY REMOVE ALL CONTAINER CONSTRAINTS */
+    .container,
+    .container-fluid,
+    .content-wrapper {
+        width: 100%;
+        max-width: 100% !important;
+        padding: 0 !important;
+        margin: 0 !important;
+    }
+
+    /* Full width content inside sections */
+    .section-content {
+        width: 100%;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    @media (min-width: 768px) {
+        .section-content {
+            padding: 0 30px;
+        }
     }
 
     @media (min-width: 992px) {
-        .container {
-            padding-left: 40px;
-            padding-right: 40px;
+        .section-content {
+            padding: 0 40px;
         }
     }
 
-    @media (min-width: 1400px) {
-        .container {
-            max-width: 1360px;
-            padding-left: 60px;
-            padding-right: 60px;
+    @media (min-width: 1200px) {
+        .section-content {
+            padding: 0 50px;
         }
     }
 
-    /* Navbar - Minimal but with animation */
+    /* Navbar - FULL WIDTH */
     .navbar {
         background: white;
         padding: 1.5rem 0;
         transition: all 0.3s ease;
         width: 100%;
         border-bottom: 1px solid #f0f0f0;
+    }
+
+    .navbar-inner {
+        width: 100%;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+
+    @media (min-width: 768px) {
+        .navbar-inner {
+            padding: 0 30px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .navbar-inner {
+            padding: 0 40px;
+        }
     }
 
     .navbar.scrolled {
@@ -91,6 +128,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         font-size: 1.8rem;
         color: var(--primary) !important;
         transition: all 0.3s ease;
+        text-decoration: none;
     }
 
     .navbar-brand:hover {
@@ -113,6 +151,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         color: var(--dark) !important;
         transition: all 0.3s ease;
         position: relative;
+        text-decoration: none;
     }
 
     .nav-link:hover {
@@ -151,11 +190,14 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         box-shadow: 0 5px 15px rgba(42, 100, 246, 0.2);
     }
 
-    /* Hero - Minimal with animations */
+    /* Hero - FULL WIDTH */
     .hero {
         background: white;
         width: 100%;
         padding: 200px 0 140px;
+        margin-top: -130px;   /* centers perfectly */
+        margin-bottom: -80px;
+        margin-left: 60px;
     }
 
     .hero h1 {
@@ -185,14 +227,24 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         animation: fadeInUp 0.8s ease 0.4s forwards;
     }
 
-    .hero img {
-        opacity: 0;
-        transform: translateX(30px);
-        animation: fadeInRight 0.8s ease 0.6s forwards;
-        border-radius: 10px;
-        transition: transform 0.5s ease;
-    }
+.hero img {
+    background: transparent !important;
+    opacity: 0;
+    transform: translateX(30px);
+    animation: fadeInRight 0.8s ease 0.6s forwards;
+    transition: transform 0.5s ease;
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;        
+    display: block;
+    background-color: transparent !important;
+    padding: 0 !important;
+}
 
+/* Extra safety for parent */
+.col-lg-6 {
+    background: transparent !important;
+}
     .hero img:hover {
         transform: scale(1.02);
     }
@@ -238,7 +290,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         box-shadow: 0 8px 20px rgba(42, 100, 246, 0.1);
     }
 
-    /* Sections */
+    /* Sections - ALL FULL WIDTH */
     .features,
     .roles,
     .how-it-works,
@@ -278,7 +330,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         transition: all 0.6s ease;
     }
 
-    /* Features - Minimal with animations */
+    /* Features */
     .features {
         background: white;
     }
@@ -326,9 +378,13 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         line-height: 1.6;
     }
 
-    /* Role Cards - Minimal with animations */
+    /* Role Cards */
     .roles {
         background: #f8f9fa;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);     /* centers perfectly */
+        margin-right: calc(50% - 50vw);    /* symmetric */
+        position: relative;
     }
 
     .role-item {
@@ -429,7 +485,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         transform: scale(1.2);
     }
 
-    /* How It Works - Minimal with animations */
+    /* How It Works */
     .how-it-works {
         background: white;
     }
@@ -483,12 +539,16 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         line-height: 1.6;
     }
 
-    /* Stats - Minimal with animations */
+    /* Stats - FULL WIDTH */
     .stats {
         background: var(--primary);
         color: white;
         position: relative;
         overflow: hidden;
+        /* Break out of parent container */
+        width: 100vw;
+        margin-left: calc(50% - 50vw);   /* centers it perfectly */
+        margin-right: calc(50% - 50vw);
     }
 
     .stats::before {
@@ -539,7 +599,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         letter-spacing: 2px;
     }
 
-    /* CTA - Minimal with animations */
+    /* CTA */
     .cta-section {
         background: white;
     }
@@ -571,12 +631,34 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         margin-bottom: 2.5rem;
     }
 
-    /* Footer - Minimal with animations */
-    .footer {
+    footer {
         background: var(--dark);
         color: white;
         padding: 80px 0 40px;
+        width: 100vw;
+        margin-left: calc(50% - 50vw);
+        margin-right: calc(50% - 50vw);
+        margin-bottom: calc(50% - 50vw);
+        position: relative;
+}
+
+    .footer-inner {
         width: 100%;
+        max-width: 1360px;
+        margin: 0 auto;
+        padding: 0 20px;
+    }
+
+    @media (min-width: 768px) {
+        .footer-inner {
+            padding: 0 30px;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .footer-inner {
+            padding: 0 40px;
+        }
     }
 
     .footer h5 {
@@ -631,6 +713,33 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
     .copyright.animate {
         opacity: 1;
         transform: translateY(0);
+    }
+
+    /* Custom Grid System without Bootstrap constraints */
+    .custom-row {
+        display: flex;
+        flex-wrap: wrap;
+        margin: 0 -15px;
+    }
+
+    .custom-col {
+        padding: 0 15px;
+        flex: 1 0 100%;
+        max-width: 100%;
+    }
+
+    @media (min-width: 768px) {
+        .custom-col {
+            flex: 1 0 50%;
+            max-width: 50%;
+        }
+    }
+
+    @media (min-width: 992px) {
+        .custom-col {
+            flex: 1 0 33.333%;
+            max-width: 33.333%;
+        }
     }
 
     /* Animation Keyframes */
@@ -692,6 +801,14 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         .cta-section {
             padding: 100px 0;
         }
+
+        .navbar-collapse {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            margin-top: 10px;
+        }
     }
 
     @media (max-width: 768px) {
@@ -719,16 +836,20 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         .step-item {
             margin-bottom: 2rem;
         }
+
+        .section-content {
+            padding: 0 15px !important;
+        }
+
+        .navbar-inner,
+        .footer-inner {
+            padding: 0 15px !important;
+        }
     }
 
     @media (max-width: 576px) {
         .hero {
             padding: 140px 0 60px;
-        }
-        
-        .container {
-            padding-left: 15px;
-            padding-right: 15px;
         }
         
         .features,
@@ -744,7 +865,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
 <body>
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top">
-        <div class="container">
+        <div class="navbar-inner">
             <a class="navbar-brand" href="/">
                 <i class="fas fa-calendar-alt"></i> BookIt
             </a>
@@ -780,10 +901,10 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
 
     <!-- Hero Section -->
     <section class="hero">
-        <div class="container">
+        <div class="section-content">
             <div class="row align-items-center">
                 <div class="col-lg-6">
-                    <h1>Streamline Lecturer Appointments</h1>
+                    <h1>Lecturer Booking Appointment</h1>
                     <p class="lead">The modern booking system that makes scheduling appointments between students and lecturers simple, efficient, and hassle-free.</p>
                     <div class="hero-buttons">
                         <a href="/users/register" class="btn-primary-custom">
@@ -795,8 +916,8 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
                     </div>
                 </div>
                 <div class="col-lg-6">
-                    <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=1000&q=80" 
-                         alt="Calendar Dashboard" class="img-fluid">
+                <img src="webroot/img/imgappoint.png"
+                         alt="Appointment Illustration" class="img-fluid">
                 </div>
             </div>
         </div>
@@ -804,7 +925,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
 
     <!-- Features Section -->
     <section class="features" id="features">
-        <div class="container">
+        <div class="section-content">
             <div class="section-title">
                 <h2>Powerful Booking Features</h2>
                 <p>Everything you need for efficient lecturer appointment management</p>
@@ -878,7 +999,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
 
     <!-- Role Cards Section -->
     <section class="roles" id="roles">
-        <div class="container">
+        <div class="section-content">
             <div class="section-title">
                 <h2>Designed For Everyone</h2>
                 <p>Tailored interfaces for different user roles</p>
@@ -938,7 +1059,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
 
     <!-- How It Works Section -->
     <section class="how-it-works" id="how-it-works">
-        <div class="container">
+        <div class="section-content">
             <div class="section-title">
                 <h2>How It Works</h2>
                 <p>Simple three-step process for booking appointments</p>
@@ -974,7 +1095,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
 
     <!-- Stats Section -->
     <section class="stats" id="stats">
-        <div class="container">
+        <div class="section-content">
             <div class="row text-center">
                 <div class="col-md-3 col-6 stat-item">
                     <div class="stat-number">1,250+</div>
@@ -998,7 +1119,7 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
 
     <!-- CTA Section -->
     <section class="cta-section">
-        <div class="container">
+        <div class="section-content">
             <div class="cta-content">
                 <h2>Ready to Simplify Your Appointment Booking?</h2>
                 <p>Join hundreds of students and lecturers who have transformed their academic scheduling experience.</p>
@@ -1022,9 +1143,9 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- Footer - FULL WIDTH -->
     <footer class="footer">
-        <div class="container">
+        <div class="footer-inner">
             <div class="row">
                 <div class="col-lg-4 mb-5">
                     <h5><i class="fas fa-calendar-alt me-2"></i>BookIt System</h5>
@@ -1076,9 +1197,11 @@ $this->assign('title', 'BookIt - Lecturer Appointment Booking System');
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     
     <script>
-            document.addEventListener('DOMContentLoaded', function() {
-        document.body.style.zoom = "80%";
-    });
+        document.addEventListener('DOMContentLoaded', function() {
+            // Remove zoom
+            document.body.style.zoom = "100%";
+        });
+        
         // Smooth scrolling for anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
